@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "58357603-7073-4975-94e7-7275eccc80ee",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7616596"
+	},
+	"item": [
+		{
+			"name": "CreaUser",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[  {\r\n    \"id\": 0,\r\n    \"username\": \"LMMS\",\r\n    \"firstName\": \"Luis\",\r\n    \"lastName\": \"Miranda\",\r\n    \"email\": \"lmiguelmirandas@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"phone\": \"+51979702185\",\r\n    \"userStatus\": 0\r\n  }\r\n]"
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/createWithArray",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"createWithArray"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConsultaUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/LMMS",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"LMMS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConsultaNamePett",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var datajsonresponse = JSON.parse(responseBody);\r",
+							"\r",
+							"function mascotasVendidas(){\r",
+							"    var mascotas = [];\r",
+							"    datajsonresponse.forEach(function(processdatamacotas){\r",
+							"    var mascota ;\r",
+							"    mascota = JSON.stringify({ id: processdatamacotas.id, name: processdatamacotas.name});\r",
+							"    mascotas.push(JSON.parse(mascota));\r",
+							"    })\r",
+							"    return mascotas;\r",
+							"     //console.log(mascotas);\r",
+							"}\r",
+							"\r",
+							"function mascotasVendidasigual(){\r",
+							"    mascotasRecorrer=mascotasVendidas()\r",
+							"   // console.log(mascotasRecorrer.name);\r",
+							"    var mascotaname;\r",
+							"    var nombreMascota = [];\r",
+							"    var cuentaName = [];\r",
+							"    \r",
+							"    mascotasRecorrer.forEach(function(processdataname){\r",
+							"        \r",
+							"        mascotaname = JSON.stringify(processdataname.name+0);\r",
+							"         //console.log(mascotaname)\r",
+							"        nombreMascota.push(JSON.parse(mascotaname));\r",
+							"        \r",
+							"    })\r",
+							"   // console.log(nombreMascota)\r",
+							"\r",
+							"   for (let i = 0; i < nombreMascota.length; i++) {\r",
+							"       let k=1;\r",
+							"    for (let j = 1; j < nombreMascota.length; j++) {\r",
+							"        if (nombreMascota[i] === nombreMascota[i+j]) { \r",
+							"            k++;\r",
+							"            delete(nombreMascota[i+j]);\r",
+							"        //console.log(cuentaName)\r",
+							"        }\r",
+							"    \r",
+							"    }\r",
+							"    cuentaName.push(nombreMascota[i]+k);\r",
+							"    }\r",
+							"  console.log(cuentaName)\r",
+							" \r",
+							"}\r",
+							"mascotasVendidasigual()"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=sold",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "sold"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
